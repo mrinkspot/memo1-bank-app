@@ -30,3 +30,12 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# Binaries
+bin/
+
+# IDE files
+.idea/
+
+# VS Code files
+.vscode/

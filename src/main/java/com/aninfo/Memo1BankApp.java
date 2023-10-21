@@ -1,6 +1,7 @@
 package com.aninfo;
 
 import com.aninfo.model.Account;
+import com.aninfo.model.TransactionType;
 import com.aninfo.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -10,6 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Collection;
 import java.util.Optional;
 import springfox.documentation.builders.PathSelectors;
@@ -27,8 +32,23 @@ public class Memo1BankApp {
 	@Autowired
 	private AccountService accountService;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		SpringApplication.run(Memo1BankApp.class, args);
+		seed();
+	}
+
+	public static void seed() throws SQLException {
+		Connection connection = DriverManager.getConnection("jdbc:h2:mem:DBNAME", "root", "SA");
+
+		// Crear la tabla TransactionTypes
+		Statement statement = connection.createStatement();
+
+		// Insertar datos de ejemplo
+		statement.execute(String.format("INSERT INTO TRANSACTION_TYPE (idm, description) VALUES (%d, 'Deposit');", TransactionType.DEPOSIT_IDM));
+		statement.execute(String.format("INSERT INTO TRANSACTION_TYPE (idm, description) VALUES (%d, 'Withdraw');", TransactionType.WITHDRAW_IDM));
+
+		// Cerrar la conexión
+		connection.close();
 	}
 
 	@PostMapping("/accounts")
