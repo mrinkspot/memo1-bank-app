@@ -4,6 +4,7 @@ import com.aninfo.exceptions.DepositNegativeSumException;
 import com.aninfo.exceptions.DepositZeroSumException;
 import com.aninfo.exceptions.InsufficientFundsException;
 import com.aninfo.model.Account;
+import com.aninfo.model.BankAccountDepositPromo;
 import com.aninfo.model.Transaction;
 import com.aninfo.model.TransactionType;
 import com.aninfo.repository.TransactionRepository;
@@ -33,6 +34,12 @@ public class TransactionService {
 
         if (sum < 0) {
             throw new DepositNegativeSumException("Cannot deposit negative sums");
+        }
+
+        if (sum >= BankAccountDepositPromo.MIN_REQUIRED_SUM.get()) {
+            double extra = sum * BankAccountDepositPromo.EXTRA_PERCENTAGE.get();
+            if (extra >= BankAccountDepositPromo.EXTRA_MAX_AMOUNT.get()) sum += BankAccountDepositPromo.EXTRA_MAX_AMOUNT.get();
+            else sum += extra;
         }
 
         TransactionType deposit = transactionTypeRepository.findById(TransactionType.DEPOSIT_IDM).get();

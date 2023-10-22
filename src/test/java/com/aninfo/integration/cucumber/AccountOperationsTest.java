@@ -3,12 +3,18 @@ package com.aninfo.integration.cucumber;
 import com.aninfo.exceptions.DepositNegativeSumException;
 import com.aninfo.exceptions.InsufficientFundsException;
 import com.aninfo.model.Account;
+import com.aninfo.model.TransactionType;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -20,9 +26,22 @@ public class AccountOperationsTest extends AccountIntegrationServiceTest {
     private DepositNegativeSumException dnse;
 
     @Before
-    public void setup() {
+    public void setup() throws SQLException {
         System.out.println("Before any test execution");
+        seed();
     }
+
+    private void seed() throws SQLException {
+        Connection connection = DriverManager.getConnection("jdbc:h2:mem:DBNAME", "root", "SA");
+
+        Statement statement = connection.createStatement();
+
+        statement.execute(String.format("INSERT INTO TRANSACTION_TYPE (idm, description) VALUES (%d, 'Deposit');", TransactionType.DEPOSIT_IDM));
+        statement.execute(String.format("INSERT INTO TRANSACTION_TYPE (idm, description) VALUES (%d, 'Withdraw');", TransactionType.WITHDRAW_IDM));
+
+        connection.close();
+    }
+
 
     @Given("^Account with a balance of (\\d+)$")
     public void account_with_a_balance_of(int balance)  {
