@@ -23,7 +23,7 @@ public class TransactionService {
     @Autowired
     private AccountService accountService;
 
-    public Collection<Transaction> getTransactionsByAccountCbu(Long cbu) { return transactionRepository.findAllByAccount_Cbu(cbu); }
+    public Collection<Transaction> findTransactionsByAccountCbu(Long cbu) { return transactionRepository.findAllByAccount_Cbu(cbu); }
 
     public Transaction createDeposit(Account account, Double sum) {
 
@@ -42,6 +42,8 @@ public class TransactionService {
         return transactionRepository.save(transaction);
     }
 
+    public Optional<Transaction> getById(Long id) { return transactionRepository.findById(id); }
+
     public Transaction createWithdraw(Account account, Double sum) {
 
         if (account.getBalance() < sum) {
@@ -52,5 +54,9 @@ public class TransactionService {
         Transaction transaction = new Transaction(account, sum, withdraw);
 
         return transactionRepository.save(transaction);
+    }
+
+    public void deleteById(Long id) {
+        transactionRepository.deleteById(id);
     }
 }

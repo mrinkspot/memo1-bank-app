@@ -26,7 +26,7 @@ public class AccountService {
         return accountRepository.findAll();
     }
 
-    public Optional<Account> findById(Long cbu) { return accountRepository.findById(cbu); }
+    public Optional<Account> getById(Long cbu) { return accountRepository.findById(cbu); }
 
     public void save(Account account) {
         accountRepository.save(account);

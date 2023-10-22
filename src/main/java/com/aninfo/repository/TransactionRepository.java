@@ -11,6 +11,5 @@ import java.util.List;
 public interface TransactionRepository extends CrudRepository<Transaction, Long> {
     @Override
     List<Transaction> findAll();
-
     Collection<Transaction> findAllByAccount_Cbu(Long cbu);
 }

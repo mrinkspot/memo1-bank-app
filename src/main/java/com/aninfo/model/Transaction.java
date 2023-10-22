@@ -17,7 +17,7 @@ public class Transaction {
 
     private LocalDateTime date;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private TransactionType transactionType;
 
     public Transaction() {
