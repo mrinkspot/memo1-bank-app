@@ -10,10 +10,6 @@ public class TransactionType {
 
     private String description;
 
-    public TransactionType(String description) {
-        this.description = description;
-    }
-
     public TransactionType() {
 
     }
@@ -42,7 +38,7 @@ public class TransactionType {
                 '}';
     }
 
-    public static final int DEPOSIT_IDM = 1;
-    public static final int WITHDRAW_IDM = 2;
+    public static final long DEPOSIT_IDM = 1;
+    public static final long WITHDRAW_IDM = 2;
 
 }

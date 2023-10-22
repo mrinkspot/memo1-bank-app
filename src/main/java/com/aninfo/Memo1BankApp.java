@@ -1,8 +1,10 @@
 package com.aninfo;
 
 import com.aninfo.model.Account;
+import com.aninfo.model.Transaction;
 import com.aninfo.model.TransactionType;
 import com.aninfo.service.AccountService;
+import com.aninfo.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -32,6 +34,9 @@ public class Memo1BankApp {
 	@Autowired
 	private AccountService accountService;
 
+	@Autowired
+	private TransactionService transactionService;
+
 	public static void main(String[] args) throws SQLException {
 		SpringApplication.run(Memo1BankApp.class, args);
 		seed();
@@ -40,14 +45,11 @@ public class Memo1BankApp {
 	public static void seed() throws SQLException {
 		Connection connection = DriverManager.getConnection("jdbc:h2:mem:DBNAME", "root", "SA");
 
-		// Crear la tabla TransactionTypes
 		Statement statement = connection.createStatement();
 
-		// Insertar datos de ejemplo
 		statement.execute(String.format("INSERT INTO TRANSACTION_TYPE (idm, description) VALUES (%d, 'Deposit');", TransactionType.DEPOSIT_IDM));
 		statement.execute(String.format("INSERT INTO TRANSACTION_TYPE (idm, description) VALUES (%d, 'Withdraw');", TransactionType.WITHDRAW_IDM));
 
-		// Cerrar la conexión
 		connection.close();
 	}
 
@@ -93,6 +95,11 @@ public class Memo1BankApp {
 	@PutMapping("/accounts/{cbu}/deposit")
 	public Account deposit(@PathVariable Long cbu, @RequestParam Double sum) {
 		return accountService.deposit(cbu, sum);
+	}
+
+	@GetMapping("/accounts/{cbu}/transactions")
+	public Collection<Transaction> getTransactions(@PathVariable Long cbu) {
+		return transactionService.getTransactionsByAccountCbu(cbu);
 	}
 
 	@Bean
