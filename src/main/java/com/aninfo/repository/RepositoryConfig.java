@@ -13,6 +13,6 @@ public class RepositoryConfig extends RepositoryRestConfigurerAdapter {
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
         config.exposeIdsFor(Account.class);
         config.exposeIdsFor(Transaction.class);
-        config.exposeIdsFor(TransactionType.class);
+//        config.exposeIdsFor(TransactionType.class);
     }
 }

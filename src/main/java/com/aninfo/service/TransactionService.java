@@ -8,7 +8,7 @@ import com.aninfo.model.BankAccountDepositPromo;
 import com.aninfo.model.Transaction;
 import com.aninfo.model.TransactionType;
 import com.aninfo.repository.TransactionRepository;
-import com.aninfo.repository.TransactionTypeRepository;
+//import com.aninfo.repository.TransactionTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +19,8 @@ import java.util.Optional;
 public class TransactionService {
     @Autowired
     private TransactionRepository transactionRepository;
-    @Autowired
-    private TransactionTypeRepository transactionTypeRepository;
+//    @Autowired
+//    private TransactionTypeRepository transactionTypeRepository;
     @Autowired
     private AccountService accountService;
 
@@ -42,9 +42,11 @@ public class TransactionService {
             else sum += extra;
         }
 
-        TransactionType deposit = transactionTypeRepository.findById(TransactionType.DEPOSIT_IDM).get();
+//        TransactionType deposit = transactionTypeRepository.findById(TransactionType.DEPOSIT_IDM).get();
 
-        Transaction transaction = new Transaction(account, sum, deposit);
+//        Transaction transaction = new Transaction(account, sum, deposit);
+
+        Transaction transaction = new Transaction(account, sum, TransactionType.DEPOSIT.get());
 
         return transactionRepository.save(transaction);
     }
@@ -57,8 +59,10 @@ public class TransactionService {
             throw new InsufficientFundsException("Insufficient funds");
         }
 
-        TransactionType withdraw = transactionTypeRepository.findById(TransactionType.WITHDRAW_IDM).get();
-        Transaction transaction = new Transaction(account, sum, withdraw);
+//        TransactionType withdraw = transactionTypeRepository.findById(TransactionType.WITHDRAW_IDM).get();
+//        Transaction transaction = new Transaction(account, sum, withdraw);
+
+        Transaction transaction = new Transaction(account, sum, TransactionType.WITHDRAW.get());
 
         return transactionRepository.save(transaction);
     }

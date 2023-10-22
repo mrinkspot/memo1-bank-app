@@ -28,19 +28,19 @@ public class AccountOperationsTest extends AccountIntegrationServiceTest {
     @Before
     public void setup() throws SQLException {
         System.out.println("Before any test execution");
-        seed();
+//        seed();
     }
 
-    private void seed() throws SQLException {
-        Connection connection = DriverManager.getConnection("jdbc:h2:mem:DBNAME", "root", "SA");
-
-        Statement statement = connection.createStatement();
-
-        statement.execute(String.format("INSERT INTO TRANSACTION_TYPE (idm, description) VALUES (%d, 'Deposit');", TransactionType.DEPOSIT_IDM));
-        statement.execute(String.format("INSERT INTO TRANSACTION_TYPE (idm, description) VALUES (%d, 'Withdraw');", TransactionType.WITHDRAW_IDM));
-
-        connection.close();
-    }
+//    private void seed() throws SQLException {
+//        Connection connection = DriverManager.getConnection("jdbc:h2:mem:DBNAME", "root", "SA");
+//
+//        Statement statement = connection.createStatement();
+//
+//        statement.execute(String.format("INSERT INTO TRANSACTION_TYPE (idm, description) VALUES (%d, 'Deposit');", TransactionType.DEPOSIT_IDM));
+//        statement.execute(String.format("INSERT INTO TRANSACTION_TYPE (idm, description) VALUES (%d, 'Withdraw');", TransactionType.WITHDRAW_IDM));
+//
+//        connection.close();
+//    }
 
 
     @Given("^Account with a balance of (\\d+)$")

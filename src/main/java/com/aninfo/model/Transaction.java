@@ -21,16 +21,25 @@ public class Transaction {
 
     private LocalDateTime date;
 
-    @OneToOne
-    private TransactionType transactionType;
+//    @OneToOne
+//    private TransactionType transactionType;
+
+    private String type;
 
     public Transaction() {
     }
 
-    public Transaction(Account account, Double amount, TransactionType transactionType) {
+//    public Transaction(Account account, Double amount, TransactionType transactionType) {
+//        this.account = account;
+//        this.amount = amount;
+//        this.transactionType = transactionType;
+//        this.date = LocalDateTime.now();
+//    }
+
+    public Transaction(Account account, Double amount, String type) {
         this.account = account;
         this.amount = amount;
-        this.transactionType = transactionType;
+        this.type = type;
         this.date = LocalDateTime.now();
     }
 
@@ -66,12 +75,18 @@ public class Transaction {
         this.date = date;
     }
 
-    public TransactionType getTransactionType() {
-        return transactionType;
+//    public TransactionType getTransactionType() {
+//        return transactionType;
+//    }
+    public String getType() {
+        return type;
     }
 
-    public void setTransactionType(TransactionType transactionType) {
-        this.transactionType = transactionType;
+//    public void setTransactionType(TransactionType transactionType) {
+//        this.transactionType = transactionType;
+//    }
+    public void setType(String transactionType) {
+        this.type = transactionType;
     }
 
 }

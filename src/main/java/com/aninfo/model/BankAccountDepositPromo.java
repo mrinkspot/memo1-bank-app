@@ -5,7 +5,7 @@ public enum BankAccountDepositPromo {
     EXTRA_PERCENTAGE(0.1),
     EXTRA_MAX_AMOUNT(500.0);
 
-    private Double value;
+    private final Double value;
 
     BankAccountDepositPromo(Double value) {
         this.value = value;

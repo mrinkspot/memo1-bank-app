@@ -2,7 +2,6 @@ package com.aninfo;
 
 import com.aninfo.model.Account;
 import com.aninfo.model.Transaction;
-import com.aninfo.model.TransactionType;
 import com.aninfo.service.AccountService;
 import com.aninfo.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Collection;
 import java.util.Optional;
 import springfox.documentation.builders.PathSelectors;
@@ -39,19 +35,19 @@ public class Memo1BankApp {
 
 	public static void main(String[] args) throws SQLException {
 		SpringApplication.run(Memo1BankApp.class, args);
-		seed();
+//		seed();
 	}
 
-	public static void seed() throws SQLException {
-		Connection connection = DriverManager.getConnection("jdbc:h2:mem:DBNAME", "root", "SA");
-
-		Statement statement = connection.createStatement();
-
-		statement.execute(String.format("INSERT INTO TRANSACTION_TYPE (idm, description) VALUES (%d, 'Deposit');", TransactionType.DEPOSIT_IDM));
-		statement.execute(String.format("INSERT INTO TRANSACTION_TYPE (idm, description) VALUES (%d, 'Withdraw');", TransactionType.WITHDRAW_IDM));
-
-		connection.close();
-	}
+//	public static void seed() throws SQLException {
+//		Connection connection = DriverManager.getConnection("jdbc:h2:mem:DBNAME", "root", "SA");
+//
+//		Statement statement = connection.createStatement();
+//
+//		statement.execute(String.format("INSERT INTO TRANSACTION_TYPE (idm, description) VALUES (%d, 'Deposit');", TransactionType.DEPOSIT_IDM));
+//		statement.execute(String.format("INSERT INTO TRANSACTION_TYPE (idm, description) VALUES (%d, 'Withdraw');", TransactionType.WITHDRAW_IDM));
+//
+//		connection.close();
+//	}
 
 	@PostMapping("/accounts")
 	@ResponseStatus(HttpStatus.CREATED)

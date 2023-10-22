@@ -1,44 +1,60 @@
 package com.aninfo.model;
 
-import javax.persistence.*;
+//import javax.persistence.*;
+//
+//@Entity
+//public class TransactionType {
+//
+//    @Id
+//    private Long idm;
+//
+//    private String description;
+//
+//    public TransactionType() {
+//
+//    }
+//
+//    public Long getIdm() {
+//        return idm;
+//    }
+//
+//    public void setIdm(Long idm) {
+//        this.idm = idm;
+//    }
+//
+//    public String getDescription() {
+//        return description;
+//    }
+//
+//    public void setDescription(String description) {
+//        this.description = description;
+//    }
+//
+//    @Override
+//    public String toString() {
+//        return "TransactionType{" +
+//                "idm=" + idm +
+//                ", description='" + description + '\'' +
+//                '}';
+//    }
+//
+//    public static final long DEPOSIT_IDM = 1;
+//    public static final long WITHDRAW_IDM = 2;
+//
+//}
 
-@Entity
-public class TransactionType {
+public enum TransactionType {
+    DEPOSIT("Deposit"),
+    WITHDRAW("Withdraw");
 
-    @Id
-    private Long idm;
+    private final String value;
 
-    private String description;
-
-    public TransactionType() {
-
+    TransactionType(String value) {
+        this.value = value;
     }
 
-    public Long getIdm() {
-        return idm;
+    public String get() {
+        return value;
     }
-
-    public void setIdm(Long idm) {
-        this.idm = idm;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Override
-    public String toString() {
-        return "TransactionType{" +
-                "idm=" + idm +
-                ", description='" + description + '\'' +
-                '}';
-    }
-
-    public static final long DEPOSIT_IDM = 1;
-    public static final long WITHDRAW_IDM = 2;
 
 }
