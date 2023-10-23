@@ -3,6 +3,7 @@ package com.aninfo.service;
 import com.aninfo.exceptions.DepositNegativeSumException;
 import com.aninfo.exceptions.DepositZeroSumException;
 import com.aninfo.exceptions.InsufficientFundsException;
+import com.aninfo.exceptions.WithdrawInvalidSumException;
 import com.aninfo.model.Account;
 import com.aninfo.model.BankAccountDepositPromo;
 import com.aninfo.model.Transaction;
@@ -54,6 +55,10 @@ public class TransactionService {
     public Optional<Transaction> getById(Long id) { return transactionRepository.findById(id); }
 
     public Transaction createWithdraw(Account account, Double sum) {
+
+        if (sum <= 0) {
+            throw new WithdrawInvalidSumException("Cannot withdraw negative or zero sum");
+        }
 
         if (account.getBalance() < sum) {
             throw new InsufficientFundsException("Insufficient funds");
